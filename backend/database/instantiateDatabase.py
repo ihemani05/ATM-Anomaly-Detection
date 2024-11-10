@@ -32,7 +32,9 @@ cursor.execute('''
 CREATE TABLE IF NOT EXISTS transactions (
     transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
     atm_id INTEGER,
-    FOREIGN KEY (atm_id) REFERENCES atms (atm_id)
+    user_id INTEGER,
+    FOREIGN KEY (atm_id) REFERENCES atms (atm_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)            
 )
 ''')
 
@@ -41,9 +43,14 @@ cursor.execute('''
 CREATE TABLE IF NOT EXISTS alerts (
     alert_id INTEGER PRIMARY KEY AUTOINCREMENT,
     transaction_id INTEGER,
-    FOREIGN KEY (transaction_id) REFERENCES transactions (transaction_id)
+    atm_id INTEGER,
+    user_id INTEGER,
+    FOREIGN KEY (transaction_id) REFERENCES transactions (transaction_id),
+    FOREIGN KEY (atm_id) REFERENCES atms (atm_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id)      
 )
 ''')
+
 
 # commit and close
 conn.commit()

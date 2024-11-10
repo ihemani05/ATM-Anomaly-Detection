@@ -33,23 +33,17 @@ CREATE TABLE IF NOT EXISTS transactions (
     transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
     atm_id INTEGER,
     user_id INTEGER,
+    amt FLOAT,
+    job INTEGER,
+    hour INTEGER,
+    age INTEGER,
+    fraud BOOLEAN,
+    time TEXT,
     FOREIGN KEY (atm_id) REFERENCES atms (atm_id),
     FOREIGN KEY (user_id) REFERENCES users (user_id)            
 )
 ''')
 
-# create alerts table
-cursor.execute('''
-CREATE TABLE IF NOT EXISTS alerts (
-    alert_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    transaction_id INTEGER,
-    atm_id INTEGER,
-    user_id INTEGER,
-    FOREIGN KEY (transaction_id) REFERENCES transactions (transaction_id),
-    FOREIGN KEY (atm_id) REFERENCES atms (atm_id),
-    FOREIGN KEY (user_id) REFERENCES users (user_id)      
-)
-''')
 
 
 # commit and close

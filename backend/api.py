@@ -53,10 +53,10 @@ def addTransaction():
 def getATMS():
     data = requests.get_json()
     user_id = data.get('user_id')
-    atms = atms.getATMS(user_id)
+    atm_list = atms.getATMS(user_id)
     return{
         'status': 200,
-        'atms': atms
+        'atms': atm_list
     }
 
 @app.route('/getTransactions', methods=['POST'])
@@ -70,10 +70,10 @@ def getTransactions():
     }
 
 @app.route('/getTransactionsByATM', methods=['POST'])
-def getTransactions():
+def getTransactionsByATM():
     data = requests.get_json()
     atm_id = data.get('atm_id')
-    transactions = atms.getTransactions(atm_id)
+    transactions = atms.getTransactionsByATM(atm_id)
     return {
         'status': 200,
         'transactions': transactions

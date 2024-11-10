@@ -14,7 +14,7 @@ cursor.execute('''
 CREATE TABLE IF NOT EXISTS users (
     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
     email TEXT NOT NULL,
-    pw TEXT NOT NULL
+    password TEXT NOT NULL
 )
 ''')
 

@@ -1,5 +1,6 @@
 import sqlite3
 import lightgbm as lgb
+import random
 import time
 
 
@@ -34,23 +35,35 @@ def addTransaction(amt, job, hour, age, atm_id):
 
     return transaction_id
 
-
+# CHANGE THRESHOLD
 def predictFraudulent(amt, job, hour, age, threshold=0.5):
-    model = lgb.Booster(model_file='model.txt')
+    model = lgb.Booster(model_file='backend/model/model.txt')
     inData = [[amt, job, hour, age]]
     prediction = model.predict(inData)
-    prediction_encoded = 1 if prediction >= threshold else 0
+    print(prediction)
+    troll = random.randint(0, 100)
+
+    prediction_encoded = 1 if troll >= 97 else 0
+
+    if(age > 90):
+        return 1
+    if(amt >  40000):
+        return 1
+    
+    
     return prediction_encoded
 
 
 def getATMS(user_id, n=10, offset=0):
     conn = get_db_connection()
     cursor = conn.cursor()
+    print("hi1")
     cursor.execute('SELECT * FROM atms WHERE user_id = ? LIMIT ? OFFSET ?', (user_id, n, offset))
     atms = cursor.fetchall()
     conn.close()
 
-    return atms
+    atm_ids = [dict(atm) for atm in atms]
+    return atm_ids
 
 def getTransactions(user_id):
     conn = get_db_connection()
@@ -59,7 +72,9 @@ def getTransactions(user_id):
     transactions = cursor.fetchall()
     conn.close()
 
-    return transactions
+    transaction_ids = [dict(transaction) for transaction in transactions]
+
+    return transaction_ids
 
 def getTransactionsByATM(atm_id):
     conn = get_db_connection()
@@ -68,21 +83,25 @@ def getTransactionsByATM(atm_id):
     transactions = cursor.fetchall()
     conn.close()
 
-    return transactions
+    transaction_ids = [dict(transaction) for transaction in transactions]
+
+    return transaction_ids
 
 def getFraudulentTransactions(user_id):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM transactions WHERE user_id = ? AND fraudulent = 1', (user_id,))
+    cursor.execute('SELECT * FROM transactions WHERE user_id = ? AND fraud = 1', (user_id,))
     fraudulent_transactions = cursor.fetchall()
     conn.close()
 
-    return fraudulent_transactions
+    fraudulent_transactions_ids = [dict(fraudulent_transaction) for fraudulent_transaction in fraudulent_transactions]
 
-def getFrauduluentTransactionsByATM(atm_id):
+    return fraudulent_transactions_ids
+
+def getFraudulentTransactionsByATM(atm_id):
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute('SELECT * FROM transactions WHERE atm_id = ? AND fraudulent = 1', (atm_id,))
+    cursor.execute('SELECT * FROM transactions WHERE atm_id = ? AND fraud = 1', (atm_id,))
     fraudulent_transactions = cursor.fetchall()
     conn.close()
 

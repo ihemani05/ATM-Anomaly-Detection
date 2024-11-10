@@ -1,43 +1,37 @@
 import { useState, useEffect } from 'react';
 import './ATMs.css';
+import axios from 'axios';
 
 function ATMs() {
   const [data, setData] = useState([]); // State to hold the data
   const [showAllATMs, setShowAllATMs] = useState(false); // State for showing all rows
-  const [showModal, setShowModal] = useState(false); // State for showing/hiding the modal
-  const [formInput, setFormInput] = useState({ message: '', timestamp: '' }); // Form input
-  const maxRows = 5; // Maximum rows to display initially
 
-  // Simulate API call to fetch data
+  // Fetch data from API
   useEffect(() => {
     const fetchData = async () => {
-      const fakeApiData = Array(30)
-        .fill(null)
-        .map((_, index) => ({
-          id: index + 1,
-          message: `ATM message ${index + 1}`,
-          timestamp: new Date().toISOString(),
-        }));
-      setData(fakeApiData); // Set the fetched data
+      try {
+        const userId = localStorage.getItem('userId'); // Get user ID from localStorage
+        const response = await axios.post('http://localhost:8080/getATMS', { user_id: userId });
+        setData(response.data.atm_ids); // Set the fetched data
+        console.log('Fetched ATMs:', response.data.atm_ids);
+      } catch (error) {
+        console.error('Error fetching ATMs:', error);
+      }
     };
 
     fetchData();
   }, []);
 
   // Handler for adding a new ATM to the list
-  const handleFormSubmit = (e) => {
-    e.preventDefault(); // Prevent form submission from refreshing the page
-    if (!formInput.message || !formInput.timestamp) {
-      alert('Please fill in both fields.');
-      return;
+  const handleAddATM = async () => {
+    try {
+      const userId = localStorage.getItem('userId'); // Get user ID from localStorage
+      const response = await axios.post('http://localhost:8080/addATM', { user_id: userId });
+      const newATM = { atm_id: response.data.atm_id, user_id: userId }; // New ATM entry
+      setData((prevData) => [newATM, ...prevData]); // Add new ATM to the top
+    } catch (error) {
+      console.error('Error adding ATM:', error);
     }
-    const newATM = {
-      id: data.length + 1, // Incremental ID
-      ...formInput, // Use input values
-    };
-    setData((prevData) => [newATM, ...prevData]); // Add new ATM to the top
-    setFormInput({ message: '', timestamp: '' }); // Clear form inputs
-    setShowModal(false); // Close the modal
   };
 
   return (
@@ -48,19 +42,17 @@ function ATMs() {
       <table>
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Message</th>
-            <th>Timestamp</th>
+            <th>ATM ID</th>
+            <th>User ID</th>
           </tr>
         </thead>
         <tbody>
           {data
-            .slice(0, showAllATMs ? data.length : maxRows) // Show all or limited rows
-            .map((item) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
-                <td>{item.message}</td>
-                <td>{item.timestamp}</td>
+            .slice(0, showAllATMs ? data.length : 5) // Show all rows or first 5 rows
+            .map((item, index) => (
+              <tr key={index}>
+                <td>{item.atm_id}</td>
+                <td>{item.user_id}</td>
               </tr>
             ))}
         </tbody>
@@ -69,48 +61,9 @@ function ATMs() {
       <button onClick={() => setShowAllATMs(!showAllATMs)}>
         {showAllATMs ? 'Show Less -' : 'Show More +'}
       </button>
-      <button onClick={() => setShowModal(true)} style={{ marginLeft: '10px' }}>
+      <button onClick={handleAddATM} style={{ marginLeft: '10px' }}>
         Add ATM
       </button>
-
-      {/* Modal */}
-      {showModal && (
-        <div className="modal-overlay">
-          <div className="modal">
-            <h3>Add New ATM</h3>
-            <form onSubmit={handleFormSubmit}>
-              <div>
-                <label>
-                  Message:
-                  <input
-                    type="text"
-                    value={formInput.message}
-                    onChange={(e) => setFormInput({ ...formInput, message: e.target.value })}
-                    placeholder="Enter message"
-                  />
-                </label>
-              </div>
-              <div>
-                <label>
-                  Timestamp:
-                  <input
-                    type="text"
-                    value={formInput.timestamp}
-                    onChange={(e) => setFormInput({ ...formInput, timestamp: e.target.value })}
-                    placeholder="Enter timestamp"
-                  />
-                </label>
-              </div>
-              <div>
-                <button type="submit">Add</button>
-                <button type="button" onClick={() => setShowModal(false)}>
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

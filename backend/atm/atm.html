@@ -78,11 +78,40 @@
 function functionToExecute() {
     // Add your JavaScript function here
 
-    document.getElementById("atm-id").value = "";
-    document.getElementById("job").value = "";
-    document.getElementById("amount").value = "";
-    document.getElementById("hour").value = "";
-    document.getElementById("age").value = "";
+    const atmId = document.getElementById("atm-id").value;
+    const job = document.getElementById("job").value;
+    const amount = document.getElementById("amount").value;
+    const hour = document.getElementById("hour").value;
+    const age = document.getElementById("age").value;
+
+    const data = {
+        atm_id: atmId,
+        job: job,
+        amt: amount,
+        hour: hour,
+        age: age
+    };
+
+    fetch('http://127.0.0.1:8080/addTransaction', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+    // document.getElementById("atm-id").value = "";
+    // document.getElementById("job").value = "";
+    // document.getElementById("amount").value = "";
+    // document.getElementById("hour").value = "";
+    // document.getElementById("age").value = "";
     alert("Submitted!");
 }
 </script>

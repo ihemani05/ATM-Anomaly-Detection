@@ -12,7 +12,7 @@ def checkLogIn(email, password):
     if conn is not None:
         try:
             cursor = conn.cursor()
-            cursor.execute("SELECT id, password FROM users WHERE email = ?", (email,))
+            cursor.execute("SELECT user_id, password FROM users WHERE email = ?", (email,))
             row = cursor.fetchone()
             #if there is a row of data with that email
             if row:
@@ -43,10 +43,11 @@ def signUp(email, password):
         try:
             cursor = conn.cursor()
             # Check if the user already exists
-            cursor.execute("SELECT id FROM users WHERE email = ?", (email,))
+            cursor.execute("SELECT user_id FROM users WHERE email = ?", (email,))
             result = cursor.fetchone()
             #if the user already exists 
             if result:
+                print("user is found")
                 user_id = result[0] 
                 # Attempt to log in
                 login_result = checkLogIn(email, password)
@@ -58,15 +59,18 @@ def signUp(email, password):
                     return -1
             else:
                 # Insert the new user
+                print("user is being inserted")
                 cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, password))
                 conn.commit()
                 user_id = cursor.lastrowid
                 return user_id
         except sqlite3.Error as e:
+            print("sqlite error: " + str(e))
             return -1
         finally:
             conn.close()
     #this runs if the connection does not work
     else:
+        print("connection to DB failed")
         return -1
 

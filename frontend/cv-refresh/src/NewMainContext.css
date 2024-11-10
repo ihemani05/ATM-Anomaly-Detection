@@ -6,9 +6,10 @@
   height: 100vh; /* Full viewport height */
   box-sizing: border-box; /* Include padding in height calculations */
   overflow: hidden; /* Prevent overflow of the container */
-  padding-top: 20px;
+  padding-top: 60px;
   padding-right: 30px;
   padding-left: 10px;
+  justify-content:flex-start;
 }
 
 .row {
@@ -26,7 +27,7 @@
   display: flex;
   overflow: hidden;
   max-height: 300px; /* Optional: Set a minimum height for cards */
-  
+  color: black; /* Set text color to black */
 }
 
 .metric-box {
@@ -36,6 +37,8 @@
 .bar-chart {
   flex: 0 0 70%; /* Take 70% of the row's width */
 }
-.metricBox, .bar-chart{
-  color: black;
+
+.metricBox{
+  margin: 0;
+  padding: 0;
 }

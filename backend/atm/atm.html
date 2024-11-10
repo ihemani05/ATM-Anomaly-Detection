@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #004481; /* Capital One blue */
+        }
+        p {
+            font-weight: bold;
+            color: #333333;
+            margin-bottom: 5px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background-color: #d03027; /* Capital One red */
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #b82623;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="hi">ATM Transfer</h1>
+
+    <p>ATM ID</p>
+    <input type="text" id="atm-id" name="atm-id">
+
+    <p>Job</p>
+    <input type="text" id="job" name="job">
+
+    <p>Amount</p>
+    <input type="text" id="amount" name="amount">
+
+    <p>Hour</p>
+    <input type="text" id="hour" name="hour">
+
+    <p>Age</p>
+    <input type="text" id="age" name="age">
+
+    <button onclick="functionToExecute()">Submit</button>
+</div>
+
+<script>
+function functionToExecute() {
+    // Add your JavaScript function here
+
+    document.getElementById("atm-id").value = "";
+    document.getElementById("job").value = "";
+    document.getElementById("amount").value = "";
+    document.getElementById("hour").value = "";
+    document.getElementById("age").value = "";
+    alert("Submitted!");
+}
+</script>
+
+</body>
+</html>

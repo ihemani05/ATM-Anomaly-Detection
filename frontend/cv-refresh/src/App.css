@@ -1,0 +1,25 @@
+html, body {
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove default padding */
+  width: 100%; /* Ensure body takes full width */
+  height: 100%; /* Ensure body takes full height */
+  box-sizing: border-box;
+}
+
+#root {
+  width: 100%;
+  height: 100%; /* Make it fill the viewport */
+  display: flex; /* Enable flexbox for layout if needed */
+  flex-direction: column; /* Add if you want column layout */
+}
+
+.app{
+  align-items: center;
+  justify-content: center;
+}
+
+#root, .app * {
+  max-width: 100%; /* Restrict child elements from exceeding parent width */
+  max-height: 100%; /* Restrict child elements from exceeding parent height */
+  box-sizing: border-box; /* Ensure padding/border fits within dimensions */
+}

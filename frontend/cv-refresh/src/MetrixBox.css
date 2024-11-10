@@ -1,0 +1,16 @@
+.metricBox {
+    width: 500px; /* Set a fixed width for all metric boxes */
+    display: block; /* Ensures boxes are aligned inline if necessary */
+    padding: 20px;
+    border-radius: 8px; /* Optional rounded corners */
+    margin: 10px auto; /* Add vertical spacing and center horizontally */
+
+  }
+  
+  .fields {
+    display: flex;
+    justify-content: space-between; /* Distribute content evenly */
+    gap: 20px; /* Space between items */
+    align-items: center; /* Align items vertically */
+  }
+  

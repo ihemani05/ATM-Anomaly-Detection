@@ -1,0 +1,45 @@
+.navbar {
+    width: 100%; /* Make it span the entire width */
+    background-color: #004879; /* Dark background for the navbar */
+    color: white; /* Text color */
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Evenly space out buttons */
+    align-items: center; /* Center items vertically */
+    padding: 10px 20px; /* Add some padding */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    z-index: 1000; /* Keep the navbar above other content */
+  }
+  
+  .navbar-button {
+    background-color: #555; /* Slightly lighter than the navbar */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px 15px; /* Padding for buttons */
+    font-size: 16px; /* Adjust font size */
+    cursor: pointer; /* Pointer cursor for hover */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
+  }
+  
+  .navbar-button:hover {
+    background-color: #D22E1E; /* Lighten button on hover */
+    color: white;
+  }
+  
+  body {
+    margin: 0; /* Remove default margin */
+    padding-top: 0; /* No padding necessary since the navbar isn't fixed */
+  }
+
+  
+  .navbar-button {
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .navbar-button.active {
+    background-color: #D22E1E; /* Active button background */
+    color: white; /* Active button text color */
+  }

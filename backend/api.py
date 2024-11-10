@@ -52,7 +52,7 @@ def addTransaction():
 @app.route('/getATMS', methods=['POST'])
 def getATMS():
     data = requests.get_json()
-    user_id = requests.get('user_id')
+    user_id = data.get('user_id')
     atms = atms.getATMS(user_id)
     return{
         'status': 200,
@@ -89,6 +89,56 @@ def getFraudulentTransactions():
         'fraudulent_transactions': fraudulent_transactions
     }
 
+@app.route('/getFraudulentTransactionsByATM', methods=['POST'])
+def getFraudulentTransactionsByATM():
+    data = requests.get_json()
+    atm_id = data.get('atm_id')
+    fraudulent_transactions = atms.getFraudulentTransactionsByATM(atm_id)
+    return {
+        'status': 200,
+        'fraudulent_transactions': fraudulent_transactions
+    }
+
+
+@app.route('/getTotalMoneyMoved', methods=['POST'])
+def getTotalMoneyMoved():
+    data = requests.get_json()
+    user_id = data.get('user_id')
+    total_money_moved = atms.getTotalMoneyMoved(user_id)
+    return {
+        'status': 200,
+        'total_money_moved': total_money_moved
+    }
+
+@app.route('/getTotalMoneyMovedByATM', methods=['POST'])
+def getTotalMoneyMovedByATM():
+    data = requests.get_json()
+    atm_id = data.get('atm_id')
+    total_money_moved = atms.getTotalMoneyMovedByATM(atm_id)
+    return {
+        'status': 200,
+        'total_money_moved': total_money_moved
+    }
+
+@app.route('/getTotalFraudulentMoneyMoved', methods=['POST'])
+def getTotalFraudulentMoneyMoved():
+    data = requests.get_json()
+    user_id = data.get('user_id')
+    total_fraudulent_money_moved = atms.getTotalFraudulentMoneyMoved(user_id)
+    return {
+        'status': 200,
+        'total_fraudulent_money_moved': total_fraudulent_money_moved
+    }
+
+@app.route('/getTotalFraudulentMoneyMovedByATM', methods=['POST'])
+def getTotalFraudulentMoneyMovedByATM():
+    data = requests.get_json()
+    atm_id = data.get('atm_id')
+    total_fraudulent_money_moved = atms.getTotalFraudulentMoneyMovedByATM(atm_id)
+    return {
+        'status': 200,
+        'total_fraudulent_money_moved': total_fraudulent_money_moved
+    }
 
 if __name__ == '__main__':
     app.run(debug=True)

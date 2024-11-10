@@ -1,0 +1,41 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #004879; /* Light background */
+  height: 100vh; /* Full viewport height */
+  box-sizing: border-box; /* Include padding in height calculations */
+  overflow: hidden; /* Prevent overflow of the container */
+  padding-top: 20px;
+  padding-right: 30px;
+  padding-left: 10px;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  min-height: 0; /* Prevent rows from growing too large */
+}
+
+.card {
+  background-color: #fff; /* Card background */
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  display: flex;
+  overflow: hidden;
+  max-height: 300px; /* Optional: Set a minimum height for cards */
+  
+}
+
+.metric-box {
+  flex: 0 0 30%; /* Take 30% of the row's width */
+}
+
+.bar-chart {
+  flex: 0 0 70%; /* Take 70% of the row's width */
+}
+.metricBox, .bar-chart{
+  color: black;
+}

@@ -87,3 +87,43 @@ def getFrauduluentTransactionsByATM(atm_id):
     conn.close()
 
     return fraudulent_transactions
+
+
+def getTotalMoneyMoved(user_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT SUM(amt) FROM transactions WHERE user_id = ?', (user_id,))
+    total_money_moved = cursor.fetchone()[0]
+    conn.close()
+
+    return total_money_moved
+
+def getTotalMoneyMovedByATM(atm_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT SUM(amt) FROM transactions WHERE atm_id = ?', (atm_id,))
+    total_money_moved = cursor.fetchone()[0]
+    conn.close()
+
+    return total_money_moved
+
+def getTotalFraudulentMoneyMoved(user_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT SUM(amt) FROM transactions WHERE user_id = ? AND fraud = 1', (user_id,))
+    total_fraudulent_money_moved = cursor.fetchone()[0]
+    conn.close()
+
+    return total_fraudulent_money_moved
+
+def getTotalFraudulentMoneyMovedByATM(atm_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT SUM(amt) FROM transactions WHERE atm_id = ? AND fraud = 1', (atm_id,))
+    total_fraudulent_money_moved = cursor.fetchone()[0]
+    conn.close()
+
+    return total_fraudulent_money_moved
+
+
+

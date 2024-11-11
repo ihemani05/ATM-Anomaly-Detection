@@ -40,17 +40,9 @@ def predictFraudulent(amt, job, hour, age, threshold=0.5):
     model = lgb.Booster(model_file='backend/model/model.txt')
     inData = [[amt, job, hour, age]]
     prediction = model.predict(inData)
-    print(prediction)
-    troll = random.randint(0, 100)
 
-    prediction_encoded = 1 if troll >= 97 else 0
+    prediction_encoded = 1 if prediction >= threshold else 0
 
-    if(age > 90):
-        return 1
-    if(amt >  40000):
-        return 1
-    
-    
     return prediction_encoded
 
 

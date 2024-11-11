@@ -1,3 +1,7 @@
+Video Presentation: https://www.youtube.com/watch?v=8Etu5iqMcIA&ab_channel=athariandre
+Slidedeck: https://docs.google.com/presentation/d/1leQ-X4vJbSHk4fjUhDmZ2ZQFjhvLcHfXOcsDPdNQnbo/edit?usp=sharing
+
+
 ## Inspiration
 With the rapid growth in ATM usage, robust fraud detection is essential to ensure financial security for ATM owners. This project was motivated by the need to equip ATM owners with real-time insights, enabling them to prevent fraud and protect their customers.
 

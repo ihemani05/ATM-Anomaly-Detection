@@ -1,5 +1,5 @@
-Video Presentation: https://www.youtube.com/watch?v=8Etu5iqMcIA&ab_channel=athariandre
-Slidedeck: https://docs.google.com/presentation/d/1leQ-X4vJbSHk4fjUhDmZ2ZQFjhvLcHfXOcsDPdNQnbo/edit?usp=sharing
+Video Presentation: https://www.youtube.com/watch?v=8Etu5iqMcIA&ab_channel=athariandre __
+Slidedeck: https://docs.google.com/presentation/d/1leQ-X4vJbSHk4fjUhDmZ2ZQFjhvLcHfXOcsDPdNQnbo/edit?usp=sharing __
 
 
 ## Inspiration
